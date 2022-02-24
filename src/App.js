@@ -1,25 +1,69 @@
-import logo from './logo.svg';
+import React, { Component } from "react";
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class Calculadora extends Component {
+  state = {
+    num1: "",
+    num2: "",
+    resultado: ""
+  };
 
-export default App;
+  somar = () => {
+    this.setState({
+      resultado: this.state.num1 + this.state.num2
+    });
+  };
+
+  subtrair = () => {
+    this.setState({
+      resultado: this.state.num1 - this.state.num2
+    });
+  };
+
+  multiplicar = () => {
+    this.setState({
+      resultado: this.state.num1 * this.state.num2
+    });
+  };
+
+  dividir = () => {
+    this.setState({
+      resultado: this.state.num1 / this.state.num2
+    });
+  };
+
+  zerar = () => {
+    this.setState({
+      num1: "",
+      num2: "",
+      resultado: ""
+    });
+  };
+
+  handleChange = (evento) => {
+    this.setState({
+      num1: Number(evento.target.value)
+    });
+  };
+  handleChange2 = (evento) => {
+    this.setState({
+      num2: Number(evento.target.value)
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Calculadora</h1>
+        <input onChange={this.handleChange} value={this.state.num1} />
+        <input onChange={this.handleChange2} value={this.state.num2} />
+        <button onClick={this.dividir}>/</button>
+        <button onClick={this.multiplicar}>*</button>
+        <button onClick={this.subtrair}>-</button>
+        <button onClick={this.somar}>+</button>
+        <button onClick={this.zerar}>C</button>
+        <input value={this.state.resultado} />
+      </div>
+    );
+  }
+}
